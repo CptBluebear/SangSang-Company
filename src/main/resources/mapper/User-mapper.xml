@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.corodiak.sangsang.mapper.UserMapper">
+
+	<resultMap type="org.corodiak.sangsang.vo.User" id="User">
+		<id column="idx" property="idx"/>
+		<result column="id" property="id"/>
+		<result column="pw" property="pw"/>
+		<result column="name" property="name"/>
+		<result column="role" property="role"/>
+	</resultMap>
+	
+	<select id="findUserById" parameterType="Map" resultMap="User">
+		SELECT
+			idx, id, pw, name, role
+		FROM USER
+		WHERE id = #{id}
+	</select>
+	
+	<insert id="insertUser" parameterType="Map">
+		INSERT INTO USER(id, pw, name, role)
+		VALUES(#{User.id}, #{User.pw}, #{User.name}, #{User.role})
+	</insert>
+
+	<select id="findUserByIdx" parameterType="Map" resultMap="User">
+		SELECT idx, id, pw, name, role
+		FROM USER
+		WHERE idx = #{idx}
+	</select>
+
+</mapper>

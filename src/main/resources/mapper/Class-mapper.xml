@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.corodiak.sangsang.mapper.ClassMapper">
+
+	<resultMap type="org.corodiak.sangsang.vo.Class" id="Class">
+		<id column="idx" property="idx"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="manager" property="manager"/>
+	</resultMap>
+	
+	<select id="findClassByUserIdx" parameterType="Map" resultMap="Class">
+		SELECT
+			CLASS.idx, CLASS.title, CLASS.content, CLASS.manager
+		FROM CLASS
+			JOIN REGISTRATION
+			ON CLASS.idx = REGISTRATION.class_idx
+		WHERE REGISTRATION.user_idx = #{idx}
+	</select>
+
+	<select id="findClassByIdx" parameterType="Map" resultMap="Class">
+		SELECT
+			idx, title, content, manager
+		FROM CLASS
+		WHERE idx = #{idx}
+	</select>
+	
+	<select id="findAllClass" resultMap="Class">
+		SELECT idx, title, content, manager FROM CLASS
+	</select>
+
+</mapper>

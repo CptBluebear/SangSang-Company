@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.corodiak.sangsang.mapper.ProbMapper">
+
+	<resultMap type="org.corodiak.sangsang.vo.Prob" id="Prob">
+		<id column="idx" property="idx"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="register_date" property="registerDate"/>
+		<result column="class_idx" property="classIdx"/>
+	</resultMap>
+	
+	<select id="findProbByClassIdx" parameterType="Map" resultMap="Prob">
+		SELECT
+			PROB.idx, PROB.title, PROB.content, PROB.register_date, PROB.class_idx
+		FROM PROB
+		WHERE
+			PROB.class_idx = #{idx}
+	</select>
+	
+	<select id="findProbByIdx" parameterType="Map" resultMap="Prob">
+		SELECT
+			PROB.idx, PROB.title, PROB.content, PROB.register_date, PROB.class_idx
+		FROM PROB
+		WHERE
+			PROB.idx = #{idx}
+	</select>
+
+</mapper>
